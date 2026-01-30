@@ -2,31 +2,50 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
+body { background: #000; color: #fff; }
 
-body {
-  background: #000;
-  color: #fff;
-}
-
-/* ===== ASPIS: background data streams ===== */
+/* subtle moving data streams */
 .aspis-streams {
+  position: absolute;
+  inset: 0;
+  opacity: 0.75;
   background-image:
-    linear-gradient(
-      115deg,
-      rgba(16, 185, 129, 0.10) 0%,
-      rgba(16, 185, 129, 0.00) 35%
-    ),
+    radial-gradient(700px 400px at 50% 55%, rgba(16,185,129,0.10), rgba(0,0,0,0) 60%),
     repeating-linear-gradient(
       115deg,
-      rgba(255, 255, 255, 0.06) 0px,
-      rgba(255, 255, 255, 0.06) 1px,
-      rgba(255, 255, 255, 0) 10px,
-      rgba(255, 255, 255, 0) 22px
+      rgba(255,255,255,0.06) 0px,
+      rgba(255,255,255,0.06) 1px,
+      rgba(0,0,0,0) 10px,
+      rgba(0,0,0,0) 24px
     );
-  background-size: cover, 480px 480px;
+  background-size: cover, 520px 520px;
   background-position: 0 0, 0 0;
   filter: blur(0.25px);
+  transform: translateZ(0);
+  animation: aspisStreamsMove 14s linear infinite;
+}
+
+@keyframes aspisStreamsMove {
+  0%   { background-position: 0 0, 0 0; }
+  100% { background-position: 0 0, 520px 520px; }
+}
+
+/* planet surface drift */
+@keyframes planetDrift {
+  0%   { background-position: 0 0; }
+  100% { background-position: 520px 0; }
+}
+
+/* tiny orbiting dots */
+@keyframes orbitSpin {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* glass utility */
+.glass {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.10);
+  backdrop-filter: blur(10px);
 }
