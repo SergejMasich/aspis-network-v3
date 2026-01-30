@@ -1,1 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #000;
+  color: #fff;
+}
+
+/* ===== ASPIS: subtle moving data streams (background layer) ===== */
+.aspis-streams {
+  position: absolute;
+  inset: 0;
+  opacity: 0.75;
+
+  background-image:
+    radial-gradient(700px 400px at 50% 55%, rgba(16,185,129,0.10), rgba(0,0,0,0) 60%),
+    repeating-linear-gradient(
+      115deg,
+      rgba(255,255,255,0.06) 0px,
+      rgba(255,255,255,0.06) 1px,
+      rgba(0,0,0,0) 10px,
+      rgba(0,0,0,0) 24px
+    );
+
+  filter: blur(0.2px);
+  background-size: cover, 480px 480px;
+  background-position: 0 0, 0 0;
+
+  animation: aspisStreamsMove 14s linear infinite;
+}
+
+@keyframes aspisStreamsMove {
+  0% {
+    background-position: 0 0, 0 0;
+  }
+  100% {
+    background-position: 0 0, 480px 480px;
+  }
+}
+
+/* Utility for glass panels */
+.glass {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(10px);
+}
