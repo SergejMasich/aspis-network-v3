@@ -2,6 +2,7 @@ import PlanetCore from "./PlanetCore";
 import TopShell from "./TopShell";
 import BottomShell from "./BottomShell";
 import RevealPanels from "./RevealPanels";
+import Callouts from "./Callouts";
 
 function lerp(a: number, b: number, t: number) {
   return a + (b - a) * t;
@@ -18,7 +19,8 @@ export default function ShieldAssembly({
   const botY = lerp(0, 190, splitT);
   const spread = lerp(0, 60, splitT);
 
-  const scale = lerp(1.0, 1.10, splitT);
+  // subtle cinematic scale
+  const scale = lerp(1.0, 1.14, splitT);
 
   return (
     <div className="pointer-events-none absolute inset-0 z-0">
@@ -32,14 +34,12 @@ export default function ShieldAssembly({
         <div
           className="relative"
           style={{
-            width: "min(78vw, 660px)",
-            height: "min(78vw, 660px)",
+            width: "min(82vw, 700px)",
+            height: "min(82vw, 700px)",
             transform: `scale(${scale})`,
             transition: "transform 0.06s linear",
           }}
         >
-          {/* streams mode switch is inside StreamLines in your current version;
-              we keep the visuals you already have */}
           {/* top shell */}
           <div
             className="absolute inset-0"
@@ -67,12 +67,15 @@ export default function ShieldAssembly({
             <PlanetCore convergeT={convergeT} />
           </div>
 
+          {/* callouts */}
+          <Callouts splitT={splitT} convergeT={convergeT} />
+
           {/* vignette */}
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0)_0%,rgba(0,0,0,0.62)_70%,rgba(0,0,0,0.92)_100%)]" />
         </div>
       </div>
 
-      {/* Full-screen meaning panels (appear after split) */}
+      {/* Panels */}
       <RevealPanels splitT={splitT} convergeT={convergeT} />
     </div>
   );
