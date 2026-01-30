@@ -1,43 +1,24 @@
-const ITEMS = [
-  {
-    title: "Unified research workspace",
-    desc: "Aggregate market intelligence into one interface: signals, fundamentals, narratives."
-  },
-  {
-    title: "Transparent verification",
-    desc: "Every feed can be validated and attributed, reducing noise and manipulation risk."
-  },
-  {
-    title: "Secure routing layer",
-    desc: "Policy-based routing of data and capital flows: permissions, limits, and controls."
-  },
-  {
-    title: "Adaptive risk engine",
-    desc: "Context-aware thresholds that adjust to volatility and regime shifts."
-  }
-];
+import { copy, Locale } from "@/lib/copy";
 
-export default function Features() {
+export default function Features({ locale }: { locale: Locale }) {
+  const t = copy[locale];
+
+  const items = [
+    ["Unified research", "Multiple providers → one premium interface."],
+    ["Verification", "Attribution, consistency checks, reduced noise."],
+    ["Protection", "Policy-driven controls and safeguards."],
+    ["Adaptivity", "Dynamic thresholds for volatility regimes."],
+  ];
+
   return (
     <section id="features" className="bg-black py-20">
-      <div className="mx-auto w-full max-w-6xl px-5">
-        <div className="max-w-2xl">
-          <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-            Core features
-          </h2>
-          <p className="mt-3 text-white/65">
-            A clean foundation. Later we can add the scroll narrative and the shield opening
-            scene without reworking the layout.
-          </p>
-        </div>
-
+      <div className="mx-auto max-w-6xl px-5">
+        <h2 className="text-3xl font-semibold sm:text-4xl">{t.sections.featuresTitle}</h2>
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {ITEMS.map((it) => (
-            <div key={it.title} className="glass rounded-2xl p-5">
-              <div className="text-base font-semibold">{it.title}</div>
-              <div className="mt-2 text-sm leading-relaxed text-white/65">
-                {it.desc}
-              </div>
+          {items.map(([a, b]) => (
+            <div key={a} className="glass rounded-2xl p-5">
+              <div className="text-base font-semibold">{a}</div>
+              <div className="mt-2 text-sm text-white/65">{b}</div>
             </div>
           ))}
         </div>
