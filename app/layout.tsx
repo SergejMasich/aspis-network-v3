@@ -3,17 +3,13 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "ASPIS Network",
-  description: "An Immutable Shield for Your Capital. Secure. Transparent. Adaptive."
+  description: "An Immutable Shield for Your Capital",
 };
 
-export default function RootLayout({
-  children
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className="min-h-screen antialiased">{children}</body>
+    <html>
+      <body className="min-h-screen bg-black text-white antialiased">{children}</body>
     </html>
   );
 }
