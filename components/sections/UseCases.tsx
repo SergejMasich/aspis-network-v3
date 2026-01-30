@@ -1,35 +1,23 @@
-const CASES = [
-  {
-    title: "Crypto market research",
-    desc: "Combine on-chain, derivatives, flows, narratives, and macro in one place."
-  },
-  {
-    title: "Risk & execution workflows",
-    desc: "Pre-trade checks, policy enforcement, and post-trade auditability."
-  },
-  {
-    title: "Fund & treasury protection",
-    desc: "Operational controls and transparent traceability across systems."
-  }
-];
+import { copy, Locale } from "@/lib/copy";
 
-export default function UseCases() {
+export default function UseCases({ locale }: { locale: Locale }) {
+  const t = copy[locale];
+
+  const items = [
+    ["Crypto research", "On-chain + derivatives + narratives in one place."],
+    ["Risk workflows", "Pre-trade checks and post-trade audit trail."],
+    ["Treasury defense", "Operational safeguards for capital."],
+  ];
+
   return (
     <section id="use-cases" className="bg-black py-20">
-      <div className="mx-auto w-full max-w-6xl px-5">
-        <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">Use cases</h2>
-        <p className="mt-3 max-w-2xl text-white/65">
-          This is the content foundation. Later, the scroll story can “open the shield” and
-          reveal these modules visually.
-        </p>
-
+      <div className="mx-auto max-w-6xl px-5">
+        <h2 className="text-3xl font-semibold sm:text-4xl">{t.sections.useCasesTitle}</h2>
         <div className="mt-10 grid gap-4 lg:grid-cols-3">
-          {CASES.map((it) => (
-            <div key={it.title} className="glass rounded-2xl p-6">
-              <div className="text-base font-semibold">{it.title}</div>
-              <div className="mt-2 text-sm leading-relaxed text-white/65">
-                {it.desc}
-              </div>
+          {items.map(([a, b]) => (
+            <div key={a} className="glass rounded-2xl p-6">
+              <div className="text-base font-semibold">{a}</div>
+              <div className="mt-2 text-sm text-white/65">{b}</div>
             </div>
           ))}
         </div>
