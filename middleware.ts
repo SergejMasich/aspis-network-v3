@@ -1,29 +1,30 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const LOCALES = ["en", "ru"] as const;
-
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
-  // allow next internals & static
+  // Не трогаем next assets и публичные файлы
   if (
     pathname.startsWith("/_next") ||
     pathname.startsWith("/api") ||
+    pathname.startsWith("/favicon.ico") ||
+    pathname.startsWith("/robots.txt") ||
+    pathname.startsWith("/sitemap.xml") ||
     pathname.includes(".")
   ) {
     return NextResponse.next();
   }
 
-  // already localized
-  const hasLocale = LOCALES.some((l) => pathname === `/${l}` || pathname.startsWith(`/${l}/`));
-  if (hasLocale) return NextResponse.next();
+  // EN как default
+  if (pathname === "/") {
+    const url = req.nextUrl.clone();
+    url.pathname = "/en";
+    return NextResponse.redirect(url);
+  }
 
-  // default locale: en
-  const url = req.nextUrl.clone();
-  url.pathname = `/en${pathname === "/" ? "" : pathname}`;
-  return NextResponse.redirect(url);
+  return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/((?!_next|api|.*\\..*).*)"],
+  matcher: ["/((?!_next).*)"],
 };
